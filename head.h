@@ -19,6 +19,7 @@ public:
     int id;               // трек-номер
     string sendname; // имя отправителя
     string getname;  // имя получателя
+    string from;
     string to;               // приемное отделение
     int weight;           // вес посылки
     int remainingTime;    // оставшееся время доставки в днях
