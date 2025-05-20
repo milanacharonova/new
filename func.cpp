@@ -144,7 +144,7 @@ void PACK::add(){
 
 void time(){
     post editable;
-    int a = count_strings("packages.txt");
+    int a = count_strings("pack.txt");
     pack arr[a];
     ifstream fpack;
     ifstream fpost;
