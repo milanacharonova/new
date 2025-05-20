@@ -11,7 +11,8 @@ public:
     int x; // Координата X
     int y; // Координата Y
     vector<int> packs; // Посылки в отделении
-    friend istream& operator>>(istream& is, const post& Post);
+    friend ostream& operator<<(ostream& os, const post& Post);
+    friend istream& operator>>(istream& is,  post& Post);
 };
 class pack{
 public:
@@ -23,7 +24,8 @@ public:
     int remainingTime;    // оставшееся время доставки в днях
     int currentX;         // x сейчас
     int currentY;         // y сейчас
-    friend istream& operator>>(istream& is, const pack& Pack);
+    friend ostream& operator<<(ostream& os, const pack& Pack);
+    friend istream& operator>>(istream& is, pack& Pack);
 };
     void display();
     void addpost();
@@ -31,5 +33,5 @@ public:
     double distance();
     void add();
     void time();
+    void test();
 }
-
