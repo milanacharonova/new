@@ -8,6 +8,16 @@
 using namespace std;
 using namespace PACK;
 
+ostream& operator<<(ostream& os, const PACK::pack& Pack){
+    os << Pack._id << " "<< Pack._sendname << " " << Pack._getname << " " << Pack._to<< " "<<Pack._weight<< " " <<Pack._remainingTime <<" " << Pack._currentX<< " "<< Pack._currentY;
+    return os;
+}
+
+istream& operator>>(istream& is, PACK::pack& Pack){
+    is >> Pack._id >> Pack._sendname >> Pack._getname >> Pack._to>>Pack._weight>>Pack._remainingTime>> Pack._currentX>> Pack._currentY;
+    return is;
+}
+
 int count_strings(string a){ //Пересчёт строк. Для использования:    int a = count_strings("название файла");
     ifstream f;
     f.open(a);
