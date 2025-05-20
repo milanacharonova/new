@@ -20,8 +20,8 @@ public:
     int _remainingTime;    // оставшееся время доставки в днях
     int _currentX;         // x сейчас
     int _currentY;         // y сейчас
-
-    
+    friend ostream& operator<<(ostream& os, const pack& Pack);
+    friend istream& operator>>(istream& is, const pack& Pack);
 };
     void display();
     void addpost();
