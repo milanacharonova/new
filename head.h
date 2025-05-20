@@ -7,7 +7,7 @@ using namespace std;
 namespace PACK{
 class post {
 public:
-    sting name;
+    string name;
     int x; // Координата X
     int y; // Координата Y
     vector<int> packs; // Посылки в отделении
