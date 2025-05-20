@@ -134,7 +134,32 @@ void PACK::add(){
     file1.close();
 }
 
-
+void delPack(){
+    int i = count_strings("post.txt");
+    ifstream fread;
+    PACK::post arr[i];
+    fread.open("post.txt");
+    if(!fread.is_open())
+        return;
+    PACK::post editable2;
+    for(int n = 0; n < i; n++){
+        fread >> editable2;
+        arr[n] = editable2;
+    }
+    fread.close();
+    PACK::post editable;
+    cout << "Enter name of post ";
+    cin >> editable.name;
+    ofstream fwrite;
+    fwrite.open("post.txt");
+    if(!fwrite.is_open())
+        return;
+    for(int n = 0; n < i; n++){
+        if(arr[n].name != editable.name){
+            fwrite << arr[n];
+        }
+    }
+}
 
 void PACK::time(){
     PACK::post editable;
@@ -168,7 +193,7 @@ void PACK::time(){
     ofstream f;
     f.open("pack.txt");
     for(int i = 0; i < a; i++){
-        f << arr[i].id << " " << arr[i].sendname<< " " << arr[i].getname << " " << arr[i].to << " " << arr[i].weight <<" " << arr[i].remainingTime << " " << arr[i].currentX << " " << arr[i].currentY << endl;
+        f << arr[i];
     }
     f.close();
 }
