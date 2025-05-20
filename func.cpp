@@ -7,6 +7,19 @@
 
 using namespace std;
 using namespace PACK;
+
+int count_strings(string a){ //Пересчёт строк. Для использования:    int a = count_strings("название файла");
+    ifstream f;
+    f.open(a);
+    string line;
+    int i = 0;
+    while(getline(f, line)){
+        i++;
+    };
+    f.close();
+    return i;
+}
+
 void pack::add(){
     cout << "Введите имя отправителя: ";
     cin >> _sendname;
@@ -20,3 +33,4 @@ void pack::add(){
     cin >> _weight;
 
 }
+
