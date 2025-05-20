@@ -25,7 +25,6 @@ public:
     int remainingTime;    // оставшееся время доставки в днях
     int currentX;         // x сейчас
     int currentY;         // y сейчас
-    friend ostream& operator<<(ostream& os, const pack& Pack);
     friend istream& operator>>(istream& is, const pack& Pack);
 };
     void display();
