@@ -11,7 +11,6 @@ public:
     int x; // Координата X
     int y; // Координата Y
     vector<int> packs; // Посылки в отделении
-    friend ostream& operator<<(ostream& os, const post& Post);
     friend istream& operator>>(istream& is, const post& Post);
 };
 class pack{
