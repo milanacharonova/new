@@ -9,12 +9,12 @@ using namespace std;
 using namespace PACK;
 
 ostream& operator<<(ostream& os, const PACK::pack& Pack){
-    os << Pack._id << " "<< Pack._sendname << " " << Pack._getname << " " << Pack._to<< " "<<Pack._weight<< " " <<Pack._remainingTime <<" " << Pack._currentX<< " "<< Pack._currentY;
+    os << Pack.id << " "<< Pack.sendname << " " << Pack.getname << " " << Pack.to<< " "<<Pack.weight<< " " <<Pack.remainingTime <<" " << Pack.currentX<< " "<< Pack.currentY;
     return os;
 }
 
 istream& operator>>(istream& is, PACK::pack& Pack){
-    is >> Pack._id >> Pack._sendname >> Pack._getname >> Pack._to>>Pack._weight>>Pack._remainingTime>> Pack._currentX>> Pack._currentY;
+    is >> Pack.id >> Pack.sendname >> Pack.getname >> Pack.to>>Pack.weight>>Pack.remainingTime>> Pack.currentX>> Pack.currentY;
     return is;
 }
 
