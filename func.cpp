@@ -46,15 +46,20 @@ void PACK::add(){
     cout << "Введите имя получателя: ";
     cin >> editable.getname;
     cout << "Введите отправочное отделение: ";
-    cin >> editable.from;
-
+    string from;
+    cin >> from;
+    editable.currentX = 0;
+    editable.currentY = 0;
     ifstream file3("post.txt");
     post editable3;
     int check = 0;
     if (!file3.is_open())
         cout << "Не удалось открыть файл5." << endl;
     while(file3 >> editable3){
-        if (editable.from == editable3.name){
+        if (from == editable3.name){
+            editable.currentX = editable3.x;
+            editable.currentY = editable3.y;
+            cout << editable.currentX << editable.currentY << endl;
             check = 1;
             break;
         }
@@ -70,10 +75,11 @@ void PACK::add(){
 
     ifstream file4("post.txt");
     post editable4;
+    check = 0;
     if (!file4.is_open())
         cout << "Не удалось открыть файл4." << endl;
     while(file4 >> editable4){
-        if (editable.from == editable4.name){
+        if (editable.to == editable4.name){
             check = 1;
             break;
         }
@@ -104,19 +110,6 @@ void PACK::add(){
         file.close();
     }
     editable.id = potencialId;
-    editable.currentX = 0;
-    editable.currentY = 0;
-    ifstream file("post.txt");
-    if (!file.is_open())
-        cout << "Не удалось открыть файл2." << endl;
-    post editable2;
-    while(file >> editable2){
-        if(editable.from == editable2.name){
-            editable.currentX = editable2.x;
-            editable.currentY = editable2.y;
-        }
-    }
-    file.close();
     int x2;
     int y2;
     ifstream file7("post.txt");
@@ -132,6 +125,7 @@ void PACK::add(){
     int dist = sqrt(pow(x2 - editable.currentX , 2) + pow(y2 - editable.currentY , 2));
     int speed = 60;
     editable.remainingTime = dist/speed;
+    cout << x2 << " " << y2 << " " << editable.currentX << editable.currentY << endl;
     file7.close();
     ofstream file1("pack.txt", ios::app);
     if (!file1.is_open())
@@ -174,7 +168,7 @@ void PACK::time(){
     ofstream f;
     f.open("pack.txt");
     for(int i = 0; i < a; i++){
-        f << arr[i].id << " " << arr[i].sendname<< " " << arr[i].getname << " " << arr[i].from << " " << arr[i].to << " " << arr[i].weight <<" " << arr[i].remainingTime << " " << arr[i].currentX << " " << arr[i].currentY << endl;
+        f << arr[i].id << " " << arr[i].sendname<< " " << arr[i].getname << " " << arr[i].to << " " << arr[i].weight <<" " << arr[i].remainingTime << " " << arr[i].currentX << " " << arr[i].currentY << endl;
     }
     f.close();
 }
