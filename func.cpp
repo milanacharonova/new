@@ -6,10 +6,9 @@
 #include <vector>
 
 using namespace std;
-using namespace PACK;
 
 ostream& operator<<(ostream& os, const PACK::pack& Pack){
-    os << Pack.id << " "<< Pack.sendname << " " << Pack.getname << " " << Pack.to<< " "<<Pack.weight<< " " <<Pack.remainingTime <<" " << Pack.currentX<< " "<< Pack.currentY;
+    os << Pack.id << " " << Pack.sendname << " " << Pack.getname << " " << Pack.to<< " " <<Pack.weight<< " " << Pack.remainingTime << " " << Pack.currentX<< " " << Pack.currentY << "\n";
     return os;
 }
 
@@ -19,7 +18,7 @@ istream& operator>>(istream& is, PACK::pack& Pack){
 }
 
 ostream& operator<<(ostream& os, const PACK::post& Post){
-    os << Post.name << " " << Post.x << Post.y << " ";
+    os << Post.name << " " << Post.x << " " << Post.y << " ";
     return os;
 }
 
@@ -143,9 +142,9 @@ void PACK::add(){
 }
 
 void time(){
-    post editable;
+    PACK::post editable;
     int a = count_strings("pack.txt");
-    pack arr[a];
+    PACK::pack arr[a];
     ifstream fpack;
     ifstream fpost;
     fpack.open("pack.txt");
