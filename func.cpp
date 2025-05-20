@@ -57,24 +57,28 @@ void pack::add(){
 void time(){
     post editable;
     int a = count_strings("packages.txt");
-    pack arrA[a];
+    pack arr[a];
     ifstream fpack;
     ifstream fpost;
     fpack.open("pack.txt");
     fpost.open("post.txt");
     for(int i = 0; i < a; i++){
-        fpack >> arrA[i];
-        if(arrA[i].remainingTime != 0){
-            arrA[i].remainingTime -= 1;
+        fpack >> arr[i];
+        if(arr[i].remainingTime != 0){
+            arr[i].remainingTime -= 1;
             while(fpost >> editable){
-                if(editable.name == arrA[i].to){
-                    //формула
-                break;
-            }
+                if(editable.name == arr[i].to){
+                    int x = editable.x-arr[i].currentX;
+                    int y = editable.y-arr[i].currentY;
+                    int c=sqrt(pow(x,2)+pow(y,2));
+                    int speed=60;
+                    arr[i].currentX=x*speed/c;
+                    arr[i].currentY=y*speed/c;
+                    break;
+                }
             }
         }else{
-         cout << "Посылка " << arrA[i].id << " прибыла" << endl;   
+         cout << "Посылка " << arr[i].id << " прибыла" << endl;
         }
     }
-    pack timing;
 }
