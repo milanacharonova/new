@@ -7,7 +7,7 @@ using namespace std;
 namespace PACK{
 class post {
 public:
-    int name;
+    sting name;
     int x; // Координата X
     int y; // Координата Y
     vector<int> packs; // Посылки в отделении
@@ -19,7 +19,7 @@ public:
     int id;               // трек-номер
     string sendname; // имя отправителя
     string getname;  // имя получателя
-    int to;               // приемное отделение
+    string to;               // приемное отделение
     int weight;           // вес посылки
     int remainingTime;    // оставшееся время доставки в днях
     int currentX;         // x сейчас
