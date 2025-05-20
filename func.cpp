@@ -18,6 +18,16 @@ istream& operator>>(istream& is, PACK::pack& Pack){
     return is;
 }
 
+ostream& operator<<(ostream& os, const PACK::post& Post){
+    os << Post.name << " " << Post.x << Post.y << " ";
+    return os;
+}
+
+istream& operator>>(istream& is, PACK::post& Post){
+    is >> Post.name >> Post.x >> Post.y;
+    return is;
+}
+
 int count_strings(string a){ //Пересчёт строк. Для использования:    int a = count_strings("название файла");
     ifstream f;
     f.open(a);
