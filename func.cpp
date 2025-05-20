@@ -142,9 +142,9 @@ void PACK::add(){
 }
 
 void time(){
-    PACK::post editable;
+    post editable;
     int a = count_strings("pack.txt");
-    PACK::pack arr[a];
+    pack arr[a];
     ifstream fpack;
     ifstream fpost;
     fpack.open("pack.txt");
@@ -168,4 +168,13 @@ void time(){
          cout << "Посылка " << arr[i].id << " прибыла" << endl;
         }
     }
+    fpack.close();
+    fpost.close();
+    ofstream f;
+    f.open("pack.txt");
+    for(int i = 0; i < a; i++){
+        f << arr[i].id << " " << arr[i].sendname<< " " << arr[i].getname << " " << arr[i].to << " " << arr[i].weight <<" " << arr[i].remainingTime << " " << arr[i].currentX << " " << arr[i].currentY << endl;
+    }
+    f.close();
 }
+
