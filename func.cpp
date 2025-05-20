@@ -6,7 +6,7 @@
 #include <vector>
 
 using namespace std;
-
+namespace PACK{
 ostream& operator<<(ostream& os, const PACK::pack& Pack){
     os << Pack.id << " " << Pack.sendname << " " << Pack.getname << " " << Pack.to<< " " <<Pack.weight<< " " << Pack.remainingTime << " " << Pack.currentX<< " " << Pack.currentY << "\n";
     return os;
@@ -18,13 +18,26 @@ istream& operator>>(istream& is, PACK::pack& Pack){
 }
 
 ostream& operator<<(ostream& os, const PACK::post& Post){
-    os << Post.name << " " << Post.x << " " << Post.y << " ";
+    os << Post.name << " " << Post.x << " " << Post.y;
+          for (int track : Post.packs) {
+              os << " " << track;
+          };
+          os << '\n';
     return os;
 }
 
 istream& operator>>(istream& is, PACK::post& Post){
-    is >> Post.name >> Post.x >> Post.y;
+    string line;
+    getline(is, line);
+    istringstream iss(line);
+    Post.packs.clear();
+    iss >> Post.name >> Post.x >> Post.y;
+    int track;
+    while(iss >> track){
+        Post.packs.push_back(track);
+    }
     return is;
+}
 }
 
 int count_strings(string a){ //Пересчёт строк. Для использования:    int a = count_strings("название файла");
@@ -104,7 +117,7 @@ void PACK::add(){
         while(file >> editable2){
             if (potencialId == editable2.id){
                 flag = 1;
-            break;
+                break;
             }
         }
         file.close();
@@ -134,30 +147,33 @@ void PACK::add(){
     file1.close();
 }
 
-void delPack(){
-    int i = count_strings("post.txt");
-    ifstream fread;
-    PACK::post arr[i];
-    fread.open("post.txt");
-    if(!fread.is_open())
-        return;
-    PACK::post editable2;
-    for(int n = 0; n < i; n++){
-        fread >> editable2;
-        arr[n] = editable2;
-    }
-    fread.close();
-    PACK::post editable;
-    cout << "Enter name of post ";
-    cin >> editable.name;
-    ofstream fwrite;
-    fwrite.open("post.txt");
-    if(!fwrite.is_open())
-        return;
-    for(int n = 0; n < i; n++){
-        if(arr[n].name != editable.name){
-            fwrite << arr[n];
+void PACK::display() {
+    string line;
+    ifstream file("post.txt");
+    if (file.is_open()) {
+        int n = 1;
+        while (getline(file, line)) {
+            istringstream iss(line);
+            string name;
+            int  x, y;
+            vector<int> packs;
+            iss >> name >> x >> y;
+            int trak;
+            while (iss >> trak) {
+                packs.push_back(trak);
+            }
+            cout << n << ". Название: " << name << ", Координаты: (" << x << ", " << y << "), Трек-номера: ";
+            for (size_t i = 0; i < packs.size(); ++i) {
+                cout << packs[i];
+                if (i < packs.size() - 1) cout << ", ";
+            }
+            cout << endl;
+            n++;
         }
+        cout << "---------------" << endl;
+        file.close();
+    } else {
+        cout << "Не удалось открыть файл." << endl;
     }
 }
 
@@ -185,7 +201,16 @@ void PACK::time(){
                 }
             }
         }else{
-         cout << "Посылка " << arr[i].id << " прибыла" << endl;
+            cout << "Посылка " << arr[i].id << " прибыла" << endl;
+            fstream file("post.txt");
+            PACK::post edit;
+            while(file >> edit){
+                if(edit.name == arr[i].to){
+                    edit.packs.push_back(arr[i].id);
+                    file << edit;
+                }
+
+            }
         }
     }
     fpack.close();
@@ -193,7 +218,14 @@ void PACK::time(){
     ofstream f;
     f.open("pack.txt");
     for(int i = 0; i < a; i++){
-        f << arr[i];
+        f << arr[i].id << " " << arr[i].sendname<< " " << arr[i].getname << " " << arr[i].to << " " << arr[i].weight <<" " << arr[i].remainingTime << " " << arr[i].currentX << " " << arr[i].currentY << endl;
     }
     f.close();
+}
+void PACK::test(){
+    post test;
+    ifstream file("post.txt");
+    while(file >> test){
+        cout << test;
+    }
 }
