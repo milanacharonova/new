@@ -73,7 +73,7 @@ void PACK::add(){
     if (!file4.is_open())
         cout << "Не удалось открыть файл4." << endl;
     while(file4 >> editable4){
-        if (editable.from == editable4.name){
+        if (editable.to == editable4.name){
             check = 1;
             break;
         }
@@ -140,6 +140,7 @@ void PACK::add(){
     file1 << editable;
     file1.close();
 }
+
 
 void time(){
     post editable;
