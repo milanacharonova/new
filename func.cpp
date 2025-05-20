@@ -40,18 +40,106 @@ int count_strings(string a){ //Пересчёт строк. Для исполь�
     return i;
 }
 
-void pack::add(){
+void PACK::add(){
+    pack editable;
     cout << "Введите имя отправителя: ";
-    cin >> _sendname;
+    cin >> editable.sendname;
     cout << "Введите имя получателя: ";
-    cin >> _getname;
+    cin >> editable.getname;
     cout << "Введите отправочное отделение: ";
-    cin >> _from;
-    cout << "Введите приемное отделение: ";
-    cin >> _to;
-    cout << "Введите вес: ";
-    cin >> _weight;
+    cin >> editable.from;
 
+    ifstream file3("post.txt");
+    post editable3;
+    int check = 0;
+    if (!file3.is_open())
+        cout << "Не удалось открыть файл5." << endl;
+    while(file3 >> editable3){
+        if (editable.from == editable3.name){
+            check = 1;
+            break;
+        }
+    }
+    file3.close();
+    if (check == 0){
+        cout << "Такого отправочного отделения не существует." << endl;
+        return;
+    }
+
+    cout << "Введите приемное отделение: ";
+    cin >> editable.to;
+
+    ifstream file4("post.txt");
+    post editable4;
+    if (!file4.is_open())
+        cout << "Не удалось открыть файл4." << endl;
+    while(file4 >> editable4){
+        if (editable.from == editable4.name){
+            check = 1;
+            break;
+        }
+    }
+    file4.close();
+    if (check == 0){
+        cout << "Такого приемного  отделения не существует." << endl;
+        return;
+    }
+
+    cout << "Введите вес: ";
+    cin >> editable.weight;
+    int flag = 1;
+    int potencialId = 0;
+    while(flag == 1){
+        flag = 0;
+        potencialId = rand() % 9000 + 1000;
+        ifstream file("pack.txt");
+        pack editable2;
+        if (!file.is_open())
+            cout << "Не удалось открыть файл3." << endl;
+        while(file >> editable2){
+            if (potencialId == editable2.id)
+                flag = 1;
+            break;
+        }
+        file.close();
+    }
+    editable.id = potencialId;
+    editable.currentX = 0;
+    editable.currentY = 0;
+    ifstream file("post.txt");
+    if (!file.is_open())
+        cout << "Не удалось открыть файл2." << endl;
+    post editable2;
+    while(file >> editable2){
+        if(editable.from == editable2.name){
+            editable.currentX = editable2.x;
+            editable.currentY = editable2.y;
+        }
+
+
+    }
+    file.close();
+    int x2;
+    int y2;
+    ifstream file7("post.txt");
+    if (!file.is_open())
+        cout << "Не удалось открыть файл2." << endl;
+    post editable7;
+    while(file >> editable7){
+        if(editable.to == editable7.name){
+            x2 = editable7.x;
+            y2 = editable7.y;
+        }
+
+
+    }
+    int dist = sqrt(pow(x2 - editable.currentX , 2) + pow(y2 - editable.currentY , 2));
+    editable.remainingTime = dist/60;
+    ofstream file1("pack.txt", ios::app);
+    if (!file1.is_open())
+        cout << "Не удалось открыть файл1." << endl;
+    file1 << editable;
+    file1.close();
 }
 
 void time(){
