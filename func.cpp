@@ -73,7 +73,7 @@ void PACK::add(){
     if (!file4.is_open())
         cout << "Не удалось открыть файл4." << endl;
     while(file4 >> editable4){
-        if (editable.to == editable4.name){
+        if (editable.from == editable4.name){
             check = 1;
             break;
         }
@@ -96,9 +96,10 @@ void PACK::add(){
         if (!file.is_open())
             cout << "Не удалось открыть файл3." << endl;
         while(file >> editable2){
-            if (potencialId == editable2.id)
+            if (potencialId == editable2.id){
                 flag = 1;
             break;
+            }
         }
         file.close();
     }
@@ -114,26 +115,24 @@ void PACK::add(){
             editable.currentX = editable2.x;
             editable.currentY = editable2.y;
         }
-
-
     }
     file.close();
     int x2;
     int y2;
     ifstream file7("post.txt");
-    if (!file.is_open())
-        cout << "Не удалось открыть файл2." << endl;
+    if (!file7.is_open())
+        cout << "Не удалось открыть файл7." << endl;
     post editable7;
-    while(file >> editable7){
+    while(file7 >> editable7){
         if(editable.to == editable7.name){
             x2 = editable7.x;
             y2 = editable7.y;
         }
-
-
     }
     int dist = sqrt(pow(x2 - editable.currentX , 2) + pow(y2 - editable.currentY , 2));
-    editable.remainingTime = dist/60;
+    int speed = 60;
+    editable.remainingTime = dist/speed;
+    file7.close();
     ofstream file1("pack.txt", ios::app);
     if (!file1.is_open())
         cout << "Не удалось открыть файл1." << endl;
@@ -142,10 +141,11 @@ void PACK::add(){
 }
 
 
-void time(){
-    post editable;
+
+void PACK::time(){
+    PACK::post editable;
     int a = count_strings("pack.txt");
-    pack arr[a];
+    PACK::pack arr[a];
     ifstream fpack;
     ifstream fpost;
     fpack.open("pack.txt");
@@ -174,8 +174,7 @@ void time(){
     ofstream f;
     f.open("pack.txt");
     for(int i = 0; i < a; i++){
-        f << arr[i].id << " " << arr[i].sendname<< " " << arr[i].getname << " " << arr[i].to << " " << arr[i].weight <<" " << arr[i].remainingTime << " " << arr[i].currentX << " " << arr[i].currentY << endl;
+        f << arr[i].id << " " << arr[i].sendname<< " " << arr[i].getname << " " << arr[i].from << " " << arr[i].to << " " << arr[i].weight <<" " << arr[i].remainingTime << " " << arr[i].currentX << " " << arr[i].currentY << endl;
     }
     f.close();
 }
-
