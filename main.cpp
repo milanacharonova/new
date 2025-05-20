@@ -1,9 +1,22 @@
 #include <iostream>
+#include "head.h"
 
-using namespace std;
+using namespace PACK;
 
 int main()
 {
-    cout << "Hello World!" << endl;
-    return 0;
+    int a;
+    cin >> a;
+    switch (a) {
+    case 1:{
+        add();
+        break;
+    }
+    case 2:{
+        time();
+        break;
+    }
+
+
+    }
 }
